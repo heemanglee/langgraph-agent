@@ -3,12 +3,15 @@ from functools import lru_cache
 
 
 class Settings(BaseSettings):
-    app_env: str = "local"
+    APP_ENV: str = "local"
 
-    openai_api_key: str
+    OPENAI_API_KEY: str
+    OPENAI_CHAT_MODEL: str
 
-    opensearch_host: str
-    opensearch_port: int = 9200
+    OPENSEARCH_HOST: str
+    OPENSEARCH_PORT: int = 9200
+    OPENSEARCH_USE_SSL: bool = True
+    OPENSEARCH_VERIFY_CERTS: bool = True
 
     model_config = SettingsConfigDict(
         env_file=".env",
