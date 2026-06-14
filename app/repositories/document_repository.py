@@ -1,10 +1,10 @@
 from datetime import datetime
 
-from app.core.opensearch import opensearch_client
+from opensearchpy import OpenSearch
 
 
 class DocumentRepository:
-    def __init__(self):
+    def __init__(self, opensearch_client: OpenSearch):
         self.os_client = opensearch_client
 
     def get_documents(self, question: str) -> list[dict]:

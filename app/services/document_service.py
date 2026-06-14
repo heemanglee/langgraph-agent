@@ -1,13 +1,11 @@
 from datetime import datetime, timezone
 
-from app.core.opensearch import opensearch_client
 from app.repositories.document_repository import DocumentRepository
 from app.schemas.document import CreateDocumentResponse
 
 
 class DocumentService:
     def __init__(self, document_repository: DocumentRepository):
-        self.os_client = opensearch_client
         self.document_repository = document_repository
 
     def get_document(self, question: str) -> list[dict]:

@@ -3,8 +3,8 @@ from langchain_openai import ChatOpenAI
 
 
 class QuestionService:
-    def __init__(self, chat_model: ChatOpenAI):
-        self.llm = chat_model
+    def __init__(self, llm: ChatOpenAI):
+        self.llm = llm
 
     def ask(self, question: str) -> AskQuestionResponse:
         response = self.llm.invoke(

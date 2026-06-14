@@ -1,9 +1,7 @@
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Depends
 
-from app.services.question_service import QuestionService
+from app.dependencies import get_agent
 from app.schemas.question import AskQuestionRequest, AskQuestionResponse
-from app.services.document_service import DocumentService
-from app.agent.react_agent import agent
 
 router = APIRouter(
     prefix="/questions",
@@ -11,7 +9,10 @@ router = APIRouter(
 
 
 @router.post("")
-def ask_question(request: AskQuestionRequest):
+def ask_question(
+    request: AskQuestionRequest,
+    agent=Depends(get_agent),
+) -> AskQuestionResponse:
     response = agent.invoke(
         {
             "messages": [
@@ -23,4 +24,7 @@ def ask_question(request: AskQuestionRequest):
         }
     )
 
-    return {"answer": response["messages"][-1].content}
+    return AskQuestionResponse(
+        question=request.question,
+        llm_answer=response["messages"][-1].content,
+    )

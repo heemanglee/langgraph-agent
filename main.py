@@ -1,8 +1,7 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 
-from app.core.config import settings
-from app.core.opensearch import opensearch_client
+from app.container import opensearch_client
 from app.api.v1.question import router as question_router
 from app.api.v1.document import router as document_router
 
